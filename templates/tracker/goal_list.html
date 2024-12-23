@@ -1,0 +1,20 @@
+<!-- tracker/templates/tracker/goal_list.html -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Goal List</title>
+</head>
+<body>
+    <h1>Goal List</h1>
+    <ul>
+        {% for goal in goals %}
+            <li>{{ goal.name }} - <a href="{% url 'create_task' goal.id %}">Create Task</a></li>
+        {% empty %}
+            <p>No goals created yet.</p>
+        {% endfor %}
+    </ul>
+    <a href="{% url 'create_goal' %}">Create New Goal</a>
+</body>
+</html>

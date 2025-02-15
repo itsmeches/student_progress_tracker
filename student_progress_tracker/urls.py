@@ -17,8 +17,11 @@ Including another URLconf
 # student_progress_tracker/urls.py
 from django.contrib import admin
 from django.urls import path, include
+from tracker.views_csp import robots_txt, sitemap_xml  # Import the views from tracker
 
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('', include('tracker.urls')),  # Include the tracker app URLs
+    path('robots.txt', robots_txt),     # Serve robots.txt with CSP headers
+    path('sitemap.xml', sitemap_xml),   # Serve sitemap.xml with CSP headers
 ]

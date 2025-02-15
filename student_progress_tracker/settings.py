@@ -38,11 +38,13 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'csp',
     'tracker',  
 ]
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
+    'csp.middleware.CSPMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
@@ -50,6 +52,7 @@ MIDDLEWARE = [
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 ]
+
 
 ROOT_URLCONF = 'student_progress_tracker.urls'
 
@@ -127,3 +130,21 @@ STATIC_URL = 'static/'
 # https://docs.djangoproject.com/en/5.1/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+# Content Security Policy Settings
+CSP_DEFAULT_SRC = ("'self'",)
+CSP_SCRIPT_SRC = ("'self'", "https://ajax.googleapis.com")
+CSP_STYLE_SRC = ("'self'", "https://fonts.googleapis.com" )
+CSP_IMG_SRC = ("'self'", "data:", "https://via.placeholder.com")
+CSP_FONT_SRC = ("'self'", "https://fonts.gstatic.com")
+CSP_FORM_ACTION = ("'self'",)
+CSP_FRAME_ANCESTORS = ("'none'",)
+
+# CSP_REPORT_ONLY = True
+CSP_INCLUDE_NONCE_IN = ['script-src']
+CSP_REPORT_URI = '/csp-report/'
+
+CSP_EXCLUDE_URLS = (
+    r'^/robots\.txt$',
+    r'^/sitemap\.xml$',
+)
